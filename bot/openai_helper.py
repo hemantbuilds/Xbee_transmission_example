@@ -227,6 +227,11 @@ class OpenAIHelper:
 
             self.last_updated[chat_id] = datetime.datetime.now()
 
+            ## PROMPT EMBEDED AT THE START
+            prompt = "For two rooms A and C: 'turn lights of room A on' -> 'lights on A'; 'change color to R/G/B in room A' -> 'lights R/G/B A'; 'turn Ac on in room A' -> 'AC on A'; 'set AC in room C to 22' -> 'AC 22 C'; if unrelated, send 'invalid' with small i in starting. Process message accordingly"
+            
+            query = prompt + query
+
             self.__add_to_history(chat_id, role="user", content=query)
 
             # Summarize the chat history if it's too long to avoid excessive token usage

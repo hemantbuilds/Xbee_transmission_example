@@ -1,0 +1,20 @@
+{
+    "user_name": "Hemant K",
+    "current_cost": {
+        "day": 4e-06,
+        "month": 4e-06,
+        "all_time": 4e-06,
+        "last_update": "2024-03-24"
+    },
+    "usage_history": {
+        "chat_tokens": {
+            "2024-03-24": 2
+        },
+        "transcription_seconds": {
+            "2024-03-24": 6.564166666666667
+        },
+        "number_images": {},
+        "tts_characters": {},
+        "vision_tokens": {}
+    }
+}

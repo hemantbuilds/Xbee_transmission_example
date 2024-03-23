@@ -4,6 +4,7 @@ import asyncio
 import logging
 import os
 import io
+import requests
 
 from uuid import uuid4
 from telegram import BotCommandScopeAllGroupChats, Update, constants
@@ -419,7 +420,11 @@ class ChatGPTTelegramBot:
                     # Get the response of the transcript
                     response, total_tokens = await self.openai.get_chat_response(chat_id=chat_id, query=transcript)
                     total_tokens  = 1
-                    response = "hi how is you?"
+                    # response = "hi how is you?"
+
+                    # SEND RESPONSE TO API POST CALL
+                    requests.get(f"http://192.168.1.61:400/upload?text={response}")
+                    
 
                     self.usage[user_id].add_chat_tokens(total_tokens, self.config['token_price'])
                     if str(user_id) not in allowed_user_ids and 'guests' in self.usage:
@@ -428,7 +433,7 @@ class ChatGPTTelegramBot:
                     # Split into chunks of 4096 characters (Telegram's message limit)
                     transcript_output = (
                         f"_{localized_text('transcript', bot_language)}:_\n\"{transcript}\"\n\n"
-                        f"_{localized_text('answer', bot_language)}:_\n{response}"
+                        f"_{localized_text('command_sent', bot_language)}:_\n{response}"
                     )
                     chunks = split_into_chunks(transcript_output)
 
